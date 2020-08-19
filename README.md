@@ -1,3 +1,12 @@
+## Acceptance criteria
+-Create a single page that displays a list of items.
+-Use React Bootstrap.
+-Add one responsive layout change via bootstrap.
+-Clicking one item selects it and applies a visual indication that it is selected.
+-Page has two buttons, "add item" and "delete selected item".
+-"add item" launches a react bootstrap modal with a webform to fill out, upon submission new item is added to list and modal closes.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
