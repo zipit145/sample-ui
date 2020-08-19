@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Button from 'react-bootstrap/Button';
 
 class List extends Component {
     render() {
@@ -11,6 +11,7 @@ class List extends Component {
             <div>{item}</div>
             )
           })}
+          <Button variant="secondary" size="lg">Add Item</Button>
         </div>
       );
     }

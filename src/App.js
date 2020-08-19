@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import List from './List'
+import List from './List';
+import Header from './Header';
+import Footer from './Footer';
+
 
 class App extends Component {
   constructor() {
@@ -16,7 +18,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header/>
         <List listItems={this.state.listItems}/>
+        <Footer/>
       </div>
     );
   }
