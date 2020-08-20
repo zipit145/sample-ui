@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './List.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
@@ -16,26 +16,28 @@ class List extends Component {
                     <ListGroup>
                         {this.props.listItems.map(item => {
                             return(
-                                <ListGroup.Item className={item.selected ? "selected" : ""}  onClick={this.props.selectItem}>
+                                <ListGroup.Item key={item.id}>
                                     <Row>
-                                        <Col sm={4}>{item.name}</Col>
-                                        <Col sm={4}>{item.body}</Col>
+                                        <Col sm={4}>Name: {item.name}</Col>
+                                        <Col sm={4}>Body: {item.body}</Col>
+                                        <Col sm={4}>
+                                            <Button variant="danger" onClick={() =>this.props.deleteItem(item.id)}  id={item.id}>
+                                                Delete Item
+                                            </Button>
+                                        </Col>
                                     </Row>
                                 </ListGroup.Item>
                             )
                         })}
                     </ListGroup>
                     <Row>
-                        <Col sm={4}>         
-                            <Button variant="primary" onClick={this.props.handleShow}>
+                        <Col sm={4}></Col> 
+                        <Col sm={4}>
+                            <Button variant="info" onClick={this.props.handleShow}>
                                 Add Item
                             </Button>
-                        </Col> 
-                        <Col sm={4}>
-                            <Button variant="primary" onClick={this.props.handleShow}>
-                                Delete Selected Item
-                            </Button>
                         </Col>
+                        <Col sm={4}></Col>
                     </Row>
                 </Container>
                 <Modal
@@ -61,12 +63,6 @@ class List extends Component {
                         </Button>
                     </Form>
                     </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={this.props.handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                    </Modal.Footer>
                 </Modal>
             </div>
         );

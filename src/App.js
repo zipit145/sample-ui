@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import List from './List';
 import Header from './Header';
-import Footer from './Footer';
 
 
 class App extends Component {
@@ -11,16 +10,17 @@ class App extends Component {
     this.state = {
       listItems: [
         {
+          id: 1,
           name: "list item 1",
           body: "sample list item 1",
-          selected: true
         },
         {
+          id: 2,
           name: "list item 2",
           body: "sample list item 2",
-          selected: false
         }
       ],
+      nextId: 3,
       show: false,
       valueName: '',
       valueBody: ''
@@ -28,20 +28,22 @@ class App extends Component {
   this.handleChangeName = this.handleChangeName.bind(this);
   this.handleChangeBody = this.handleChangeBody.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  this.deleteItem = this.deleteItem.bind(this);
 }
 handleClose = () => this.setState({show: false});
 handleShow = () => this.setState({show: true});
 handleSubmit(event) {
   const newListItem = {
+    id: this.state.nextId,
     name: this.state.valueName,
     body: this.state.valueBody,
-    selected: false
   };
   this.setState(state => {
     const listItems = state.listItems.concat(newListItem);
     return {
       listItems,
-      show: false
+      show: false,
+      nextId: state.nextId++
     };
   });
   event.preventDefault();
@@ -52,8 +54,13 @@ handleChangeName(event) {
 handleChangeBody(event) {
   this.setState({valueBody: event.target.value});
 }
-selectItem(event) {
-  console.log(event.target.value, "itemselect")
+deleteItem(id) {
+  this.setState(state => {
+    const listItems = state.listItems.filter(item => item.id !== id);
+    return {
+      listItems,
+    }
+  })
 }
   render() {
     return (
@@ -69,9 +76,8 @@ selectItem(event) {
           handleSubmit={this.handleSubmit}
           handleChangeName={this.handleChangeName}
           handleChangeBody={this.handleChangeBody}
-          selectItem={this.selectItem}
+          deleteItem={this.deleteItem}
         />
-        <Footer/>
       </div>
     );
   }
