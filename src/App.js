@@ -10,8 +10,14 @@ class App extends Component {
     super();
     this.state = {
       listItems: [
-        "sample list item 1",
-        "sample list item 2"
+        {
+          name: "list item 1",
+          body: "sample list item 1"
+        },
+        {
+          name: "list item 2",
+          body: "sample list item 2"
+        }
       ]
     }
   }
