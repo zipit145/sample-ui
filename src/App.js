@@ -3,7 +3,6 @@ import './App.css';
 import List from './List';
 import Header from './Header';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -29,7 +28,7 @@ class App extends Component {
   this.handleChangeBody = this.handleChangeBody.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
-}
+};
 handleClose = () => this.setState({show: false});
 handleShow = () => this.setState({show: true});
 handleSubmit(event) {
@@ -47,13 +46,13 @@ handleSubmit(event) {
     };
   });
   event.preventDefault();
-}
+};
 handleChangeName(event) {
   this.setState({valueName: event.target.value});
-}
+};
 handleChangeBody(event) {
   this.setState({valueBody: event.target.value});
-}
+};
 deleteItem(id) {
   this.setState(state => {
     const listItems = state.listItems.filter(item => item.id !== id);
@@ -61,7 +60,7 @@ deleteItem(id) {
       listItems,
     }
   })
-}
+};
   render() {
     return (
       <div className="App">
@@ -81,7 +80,6 @@ deleteItem(id) {
       </div>
     );
   }
-
 }
 
 export default App;
