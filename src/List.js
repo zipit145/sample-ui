@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -6,90 +6,63 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class List extends Component {
-    
-    constructor() {
-        super();
-        this.state = {
-            show: false,
-            valueName: '',
-            valueBody: ''
-        }
-        this.handleChangeName = this.handleChangeName.bind(this);
-        this.handleChangeBody = this.handleChangeBody.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleClose = () => this.setState({show: false});
-    handleShow = () => this.setState({show: true});
-    handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.valueName + this.state.valueBody)
-        this.setState({
-            show: false
-        });
-        event.preventDefault();
-    }
-    handleChangeName(event) {
-        this.setState({valueName: event.target.value});
-    }
-    handleChangeBody(event) {
-        this.setState({valueBody: event.target.value});
-    }
-
     render() {
         return (
             <div className="List">
                 <Container>
-                    {this.props.listItems.map(item => {
-                        return(
-                            <Row>
-                                <Col sm={4}>{item.name}</Col>
-                                <Col sm={4}>{item.body}</Col>
-                            </Row>
-                        )
-                    })}
+                    <ListGroup>
+                        {this.props.listItems.map(item => {
+                            return(
+                                <ListGroup.Item className={item.selected ? "selected" : ""}  onClick={this.props.selectItem}>
+                                    <Row>
+                                        <Col sm={4}>{item.name}</Col>
+                                        <Col sm={4}>{item.body}</Col>
+                                    </Row>
+                                </ListGroup.Item>
+                            )
+                        })}
+                    </ListGroup>
                     <Row>
                         <Col sm={4}>         
-                            <Button variant="primary" onClick={this.handleShow}>
+                            <Button variant="primary" onClick={this.props.handleShow}>
                                 Add Item
                             </Button>
                         </Col> 
                         <Col sm={4}>
-                            <Button variant="primary" onClick={this.handleShow}>
+                            <Button variant="primary" onClick={this.props.handleShow}>
                                 Delete Selected Item
                             </Button>
                         </Col>
                     </Row>
-
                 </Container>
                 <Modal
-                    show={this.state.show}
-                    onHide={this.handleClose}
+                    show={this.props.show}
+                    onHide={this.props.handleClose}
                     keyboard={false}
                 >
                     <Modal.Header closeButton>
                     <Modal.Title>New List Item</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <Form  onSubmit={this.handleSubmit}>
+                    <Form  onSubmit={this.props.handleSubmit}>
                         <Form.Group controlId="formBasicText">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Name" onChange={this.handleChangeName}/>
-
+                            <Form.Control type="text" placeholder="Enter Name" onChange={this.props.handleChangeName}/>
                         </Form.Group>
                         <Form.Group controlId="formBasicText">
                             <Form.Label>Body</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Body" onChange={this.handleChangeBody}/>
-
+                            <Form.Control type="text" placeholder="Enter Body" onChange={this.props.handleChangeBody}/>
                         </Form.Group>
-
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
                     </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
+                    <Button variant="secondary" onClick={this.props.handleClose}>
                         Close
                     </Button>
                     <Button variant="primary">Understood</Button>
